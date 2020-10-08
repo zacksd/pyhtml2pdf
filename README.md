@@ -1,6 +1,13 @@
 # pyhtml2pdf
 Simple python wrapper to convert HTML to PDF with headless Chrome via selenium.
 
+## Install
+```
+pip install pyhtml2pdf
+```
+
+## Example
+
 **Use with website url**
 
 ```
