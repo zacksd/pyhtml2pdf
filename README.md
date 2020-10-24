@@ -6,6 +6,11 @@ Simple python wrapper to convert HTML to PDF with headless Chrome via selenium.
 pip install pyhtml2pdf
 ```
 
+## Dependencies
+
+ - Selenium Chrome Webdriver [https://chromedriver.chromium.org/downloads] (If Chrome is installed on the machine you won't need to install the chrome driver)
+ - Ghostscript [https://www.ghostscript.com/download.html]
+
 ## Example
 
 ### **Convert to PDF**
@@ -34,7 +39,9 @@ converter.convert(f'file:///{path}', 'sample.pdf')
 converter.convert(source, target, timeout=2)
 ```
 
-**Compress the output PDF**
+**Compress the converted PDF**
+
+Some PDFs may be oversized. So there is a built in PDF compression feature.
 
 The power of the compression,
  - 0: default
