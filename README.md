@@ -8,6 +8,8 @@ pip install pyhtml2pdf
 
 ## Example
 
+### **Convert to PDF**
+
 **Use with website url**
 
 ```
@@ -32,4 +34,31 @@ converter.convert(f'file:///{path}', 'sample.pdf')
 converter.convert(source, target, timeout=2)
 ```
 
-Inspired the work from https://github.com/maxvst/python-selenium-chrome-html-to-pdf-converter.git
+**Compress the output PDF**
+
+The power of the compression,
+ - 0: default
+ - 1: prepress
+ - 2: printer
+ - 3: ebook
+ - 4: screen
+
+```
+converter.convert(source, target, compress=True, power=0)
+```
+
+### **Compress PDF**
+
+**Use it to compress a PDF file from local machine**
+
+```
+import os
+from pyhtml2pdf import compressor
+
+compressor.compress('sample.pdf', 'compressed_sample.pdf')
+```
+
+Inspired the works from,
+
+ - https://github.com/maxvst/python-selenium-chrome-html-to-pdf-converter.git
+ - https://github.com/theeko74/pdfc

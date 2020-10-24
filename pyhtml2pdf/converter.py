@@ -9,11 +9,27 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.expected_conditions import staleness_of
 from webdriver_manager.chrome import ChromeDriverManager
 
+from .compressor import __compress
 
-def convert(source: str, target: str, timeout: int = 2):
+
+def convert(source: str, target: str, timeout: int = 2, compress: bool = False, power: int = 0):
+    '''
+    Convert a given html file or website into PDF
+
+    :param str source: source html file or website link
+    :param str target: target location to save the PDF
+    :param int timeout: timeout in seconds. Default value is set to 2 seconds
+    :param bool compress: whether PDF is compressed or not. Default value is False
+    :param int power: power of the compression. Default value is 0. This can be 0: default, 1: prepress, 2: printer, 3: ebook, 4: screen
+   '''
+
     result = __get_pdf_from_html(source, timeout)
-    with open(target, 'wb') as file:
-        file.write(result)
+
+    if compress:
+        __compress(result, target, power)
+    else:
+        with open(target, 'wb') as file:
+            file.write(result)
 
 def __send_devtools(driver, cmd, params={}):
     resource = "/session/%s/chromium/send_command_and_get_result" % driver.session_id
@@ -48,8 +64,3 @@ def __get_pdf_from_html(path: str, timeout: int, print_options={}):
         result = __send_devtools(driver, "Page.printToPDF", calculated_print_options)
         driver.quit()
         return base64.b64decode(result['data'])
-
-
-if __name__ == "__main__":
-    pass
-    # TODO: add short help layout
