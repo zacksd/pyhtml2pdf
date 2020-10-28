@@ -12,7 +12,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from .compressor import __compress
 
 
-def convert(source: str, target: str, timeout: int = 2, compress: bool = False, power: int = 0):
+def convert(source: str, target: str, timeout: int = 2, compress: bool = False, power: int = 0, install_driver: bool = True):
     '''
     Convert a given html file or website into PDF
 
@@ -23,7 +23,7 @@ def convert(source: str, target: str, timeout: int = 2, compress: bool = False, 
     :param int power: power of the compression. Default value is 0. This can be 0: default, 1: prepress, 2: printer, 3: ebook, 4: screen
    '''
 
-    result = __get_pdf_from_html(source, timeout)
+    result = __get_pdf_from_html(source, timeout, install_driver)
 
     if compress:
         __compress(result, target, power)
@@ -43,11 +43,23 @@ def __send_devtools(driver, cmd, params={}):
     return response.get('value')
 
 
-def __get_pdf_from_html(path: str, timeout: int, print_options={}):
+def __get_pdf_from_html(path: str, timeout: int, install_driver: bool, print_options={}):
     webdriver_options = Options()
+    webdriver_prefs = {}
+    driver = None
+
     webdriver_options.add_argument('--headless')
     webdriver_options.add_argument('--disable-gpu')
-    driver = webdriver.Chrome(ChromeDriverManager().install(), options=webdriver_options)
+    webdriver_options.add_argument('--no-sandbox')
+    webdriver_options.add_argument('--disable-dev-shm-usage')
+    webdriver_options.experimental_options['prefs'] = webdriver_prefs
+
+    webdriver_prefs['profile.default_content_settings'] = {'images': 2}
+
+    if install_driver:
+        driver = webdriver.Chrome(ChromeDriverManager().install(), options=webdriver_options)
+    else:
+        driver = webdriver.Chrome(options=webdriver_options)
 
     driver.get(path)
 
