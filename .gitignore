@@ -126,3 +126,5 @@ dmypy.json
 *.pdf
 *.html
 chromedriver
+requirements.txt
+main.py
