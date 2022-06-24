@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pyhtml2pdf", # Replace with your own username
-    version="0.0.3",
+    version="0.0.5",
     author="Kumara Fernando",
     author_email="mklmfernando@gmail.com",
     description="Simple python wrapper to convert HTML to PDF with headless Chrome via selenium.",
@@ -14,7 +14,7 @@ setuptools.setup(
     url="https://github.com/kumaF/pyhtml2pdf",
     packages=setuptools.find_packages(),
     install_requires=[            # I get to this in a second
-          'htmlhtml',
+          'selenium',
           'webdriver-manager',
     ],
     classifiers=[
