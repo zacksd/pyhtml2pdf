@@ -14,7 +14,7 @@ setuptools.setup(
     url="https://github.com/kumaF/pyhtml2pdf",
     packages=setuptools.find_packages(),
     install_requires=[            # I get to this in a second
-          'selenium',
+          'htmlhtml',
           'webdriver-manager',
     ],
     classifiers=[

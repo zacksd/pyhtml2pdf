@@ -8,6 +8,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.expected_conditions import staleness_of
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
 
 from .compressor import __compress
 
@@ -64,7 +65,7 @@ def __get_pdf_from_html(path: str, timeout: int, install_driver: bool, print_opt
     driver.get(path)
 
     try:
-       WebDriverWait(driver, timeout).until(staleness_of(driver.find_element_by_tag_name('html')))
+       WebDriverWait(driver, timeout).until(staleness_of(driver.find_element(by=By.TAG_NAME, value='html')))
     except TimeoutException:
         calculated_print_options = {
             'landscape': False,
