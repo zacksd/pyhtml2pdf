@@ -54,6 +54,12 @@ The power of the compression,
 converter.convert(source, target, compress=True, power=0)
 ```
 
+### **Pass Print Options**
+
+You can use print options from here [https://vanilla.aslushnikov.com/?Page.printToPDF]
+
+converter.convert( f"file:///{path}", f"sample.pdf", print_options={"scale": 0.95} )
+
 ### **Compress PDF**
 
 **Use it to compress a PDF file from local machine**
@@ -69,3 +75,4 @@ Inspired the works from,
 
  - https://github.com/maxvst/python-selenium-chrome-html-to-pdf-converter.git
  - https://github.com/theeko74/pdfc
+
