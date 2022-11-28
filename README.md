@@ -58,7 +58,9 @@ converter.convert(source, target, compress=True, power=0)
 
 You can use print options mentioned [here](https://vanilla.aslushnikov.com/?Page.printToPDF)
 
+```
 converter.convert( f"file:///{path}", f"sample.pdf", print_options={"scale": 0.95} )
+```
 
 ### **Compress PDF**
 
