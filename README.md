@@ -8,8 +8,8 @@ pip install pyhtml2pdf
 
 ## Dependencies
 
- - Selenium Chrome Webdriver [https://chromedriver.chromium.org/downloads] (If Chrome is installed on the machine you won't need to install the chrome driver)
- - Ghostscript [https://www.ghostscript.com/download.html]
+ - [Selenium Chrome Webdriver](https://chromedriver.chromium.org/downloads) (If Chrome is installed on the machine you won't need to install the chrome driver)
+ - [Ghostscript](https://www.ghostscript.com/download.html)
 
 ## Example
 
@@ -56,7 +56,7 @@ converter.convert(source, target, compress=True, power=0)
 
 ### **Pass Print Options**
 
-You can use print options from here [https://vanilla.aslushnikov.com/?Page.printToPDF]
+You can use print options mentioned [here](https://vanilla.aslushnikov.com/?Page.printToPDF)
 
 converter.convert( f"file:///{path}", f"sample.pdf", print_options={"scale": 0.95} )
 
