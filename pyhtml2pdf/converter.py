@@ -30,6 +30,7 @@ def convert(
     :param int timeout: timeout in seconds. Default value is set to 2 seconds
     :param bool compress: whether PDF is compressed or not. Default value is False
     :param int power: power of the compression. Default value is 0. This can be 0: default, 1: prepress, 2: printer, 3: ebook, 4: screen
+    :param bool install_driver: whether or not to install using ChromeDriverManager. Default value is True
     :param dict print_options: options for the printing of the PDF. This can be any of the params in here:https://vanilla.aslushnikov.com/?Page.printToPDF
     """
 
