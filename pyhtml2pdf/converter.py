@@ -4,6 +4,7 @@ import base64
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.expected_conditions import staleness_of
@@ -72,9 +73,8 @@ def __get_pdf_from_html(
     webdriver_prefs["profile.default_content_settings"] = {"images": 2}
 
     if install_driver:
-        driver = webdriver.Chrome(
-            ChromeDriverManager().install(), options=webdriver_options
-        )
+        service = Service(ChromeDriverManager().install())
+        driver = webdriver.Chrome(service=service, options=webdriver_options)
     else:
         driver = webdriver.Chrome(options=webdriver_options)
 
