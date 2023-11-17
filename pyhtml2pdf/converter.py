@@ -1,4 +1,3 @@
-import sys
 import json
 import base64
 
@@ -21,7 +20,8 @@ def convert(
     compress: bool = False,
     power: int = 0,
     install_driver: bool = True,
-    print_options: dict = {},
+    print_options: dict = None,
+    ghostscript_command: str = None
 ):
     """
     Convert a given html file or website into PDF
@@ -33,19 +33,28 @@ def convert(
     :param int power: power of the compression. Default value is 0. This can be 0: default, 1: prepress, 2: printer, 3: ebook, 4: screen
     :param bool install_driver: whether or not to install using ChromeDriverManager. Default value is True
     :param dict print_options: options for the printing of the PDF. This can be any of the params in here:https://vanilla.aslushnikov.com/?Page.printToPDF
+    :param ghostscript_command: The name of the ghostscript executable. If set to the default value None, is attempted
+                            to be inferred from the OS.
+                            If the OS is not Windows, "gs" is used as executable name.
+                            If the OS is Windows, and it is a 64-bit version, "gswin64c" is used. If it is a 32-bit
+                            version, "gswin32c" is used.
     """
+    if print_options is None:
+        print_options = {}
 
     result = __get_pdf_from_html(
         source, timeout, install_driver, print_options)
 
     if compress:
-        __compress(result, target, power)
+        __compress(result, target, power, ghostscript_command)
     else:
         with open(target, "wb") as file:
             file.write(result)
 
 
-def __send_devtools(driver, cmd, params={}):
+def __send_devtools(driver, cmd, params=None):
+    if params is None:
+        params = {}
     resource = "/session/%s/chromium/send_command_and_get_result" % driver.session_id
     url = driver.command_executor._url + resource
     body = json.dumps({"cmd": cmd, "params": params})
@@ -59,10 +68,9 @@ def __send_devtools(driver, cmd, params={}):
 
 def __get_pdf_from_html(
     path: str, timeout: int, install_driver: bool, print_options: dict
-):
+) -> bytes:
     webdriver_options = Options()
     webdriver_prefs = {}
-    driver = None
 
     webdriver_options.add_argument("--headless")
     webdriver_options.add_argument("--disable-gpu")
