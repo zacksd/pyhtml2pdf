@@ -10,7 +10,7 @@ from selenium.webdriver.support.expected_conditions import staleness_of
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
-from .compressor import __compress
+from .compressor import _compress
 
 
 def convert(
@@ -46,7 +46,7 @@ def convert(
         source, timeout, install_driver, print_options)
 
     if compress:
-        __compress(result, target, power, ghostscript_command)
+        _compress(result, target, power, ghostscript_command)
     else:
         with open(target, "wb") as file:
             file.write(result)

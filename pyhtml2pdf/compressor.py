@@ -64,7 +64,7 @@ def compress(source: str | os.PathLike | _TemporaryFileWrapper,
                     )
 
 
-def __compress(result: bytes,
+def _compress(result: bytes,
                target: str | os.PathLike,
                power: int,
                ghostscript_command: str | None):
