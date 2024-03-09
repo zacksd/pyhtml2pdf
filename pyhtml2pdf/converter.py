@@ -1,4 +1,3 @@
-import sys
 import json
 import base64
 import io
@@ -125,5 +124,6 @@ def __get_pdf_from_html(
         calculated_print_options.update(print_options)
         result = __send_devtools(
             driver, "Page.printToPDF", calculated_print_options)
-        driver.quit()
         return base64.b64decode(result["data"])
+    finally:
+        driver.quit()
